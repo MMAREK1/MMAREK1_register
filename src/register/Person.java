@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 /**
  * register.Person.
  */
-public class Person  implements Serializable{
+@SuppressWarnings("serial")
+public class Person implements Comparable<Person>, Serializable{
 	/** Name of this person. */
 	private String name;
 
@@ -89,5 +90,10 @@ public class Person  implements Serializable{
 	 */
 	public String toString() {
 		return name + " (" + phoneNumber + ")";
+	}
+	
+	@Override
+	public int compareTo(Person person) {
+		return this.name.compareTo(person.name);
 	}
 }

@@ -3,6 +3,7 @@ package register;
 /**
  * register.Person register.
  */
+@SuppressWarnings("serial")
 public class ArrayRegister implements Register {
 	/** register.Person array. */
 	private Person[] persons;
@@ -63,13 +64,8 @@ public class ArrayRegister implements Register {
 		} else {
 			for (int i = 0; i < getCount(); i++) {
 				if (person.getName().compareTo(getPerson(i).getName()) < 0) {
-					for (int j = getCount(); j > i+1; j--) {
-						if (j == getCount()) {
-							persons[count] = getPerson(j - 1);
-						} else {
-							getPerson(j).setName(getPerson(j - 1).getName());
-							getPerson(j).setPhoneNumber(getPerson(j - 1).getPhoneNumber());
-						}
+					for (int j = getCount(); j > i; j--) {
+						persons[j] = getPerson(j - 1);
 					}
 					persons[i] = person;
 					break;

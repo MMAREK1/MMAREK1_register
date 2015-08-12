@@ -1,6 +1,8 @@
 package register;
 
-public interface Register {
+import java.io.Serializable;
+
+public interface Register extends Serializable {
 
 	/**
 	 * Returns the number of persons in this register.
@@ -8,6 +10,13 @@ public interface Register {
 	 * @return the number of persons in this register
 	 */
 	int getCount();
+
+	/**
+	 * Returns the maximum number of persons in this register.
+	 * 
+	 * @return the maximum number of persons in this register.
+	 */
+	int getSize();
 
 	/**
 	 * Returns the person at the specified position in this register.

@@ -1,21 +1,19 @@
 package register;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
  * User interface of the application.
  */
-public class ConsoleUI implements Serializable{
+@SuppressWarnings("serial")
+public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	/** register.Register of persons. */
-	private Register register;
+	Register register;
+	RegisterLoader registerLoader = new DatabaseRegisterLoader();
+	
 
 	/**
 	 * In JDK 6 use Console class instead.
@@ -36,24 +34,7 @@ public class ConsoleUI implements Serializable{
 
 	}
 
-	public void run() throws IOException, ClassNotFoundException{
-		File f = new File("out.bin");
-		FileOutputStream out;
-		ObjectOutputStream so;
-		if (f.exists()) {
-			FileInputStream in = new FileInputStream("out.bin");
-			ObjectInputStream si = new ObjectInputStream(in);
-			while( in.available() > 0){
-			Person getPerson =(Person) si.readObject();
-			register.addPerson(getPerson);
-			}
-			si.close();
-			out = new FileOutputStream("out.bin");
-			so = new ObjectOutputStream(out);
-		} else {
-			out = new FileOutputStream("out.bin");
-			so = new ObjectOutputStream(out);
-		}
+	public void run() throws IOException, ClassNotFoundException {
 		while (true) {
 			switch (showMenu()) {
 			case PRINT:
@@ -72,10 +53,11 @@ public class ConsoleUI implements Serializable{
 				findInRegister();
 				break;
 			case EXIT:
-				for (int i = 0; i < register.getCount(); i++) {
-					so.writeObject(register.getPerson(i));
+				try {
+					registerLoader.store(register);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				so.close();
 				return;
 			}
 		}

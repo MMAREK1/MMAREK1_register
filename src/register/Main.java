@@ -1,19 +1,14 @@
 package register;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 /**
  * Created by jaro on 3.2.2014.
  */
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-		Register register = new ArrayRegister(20);
 
-
-
-		ConsoleUI ui = new ConsoleUI(register);
+		RegisterLoader registerLoader = new DatabaseRegisterLoader();
+		ConsoleUI ui = new ConsoleUI(registerLoader.load());
 		ui.run();
 	}
 }

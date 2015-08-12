@@ -2,20 +2,15 @@ package register;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-public class ListRegister implements Register, Comparable {
+@SuppressWarnings("serial")
+public class ListRegister implements Register {
 	private List<Person> listRegisters = new ArrayList<Person>();
-	private int count;
-
-	public Iterator<Person> iterator() {
-		return listRegisters.iterator();
-	}
 
 	@Override
 	public int getCount() {
-		return count;
+		return listRegisters.size();
 	}
 
 	@Override
@@ -26,33 +21,38 @@ public class ListRegister implements Register, Comparable {
 	@Override
 	public void addPerson(Person person) {
 		listRegisters.add(person);
-		// Collections.sort(listRegisters);
+		Collections.sort(listRegisters);
 	}
 
 	@Override
 	public Person findPersonByName(String name) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < listRegisters.size(); i++) {
+			if (name.equals(listRegisters.get(i).getName())) {
+				return getPerson(i);
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public Person findPersonByPhoneNumber(String phoneNumber) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < listRegisters.size(); i++) {
+			if (phoneNumber.equals(listRegisters.get(i).getPhoneNumber())) {
+				return getPerson(i);
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public void removePerson(Person person) {
-		// TODO Auto-generated method stub
+		listRegisters.remove(person);
 
 	}
 
-
-
 	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getSize() {
+		return listRegisters.size();
 	}
 
 }
