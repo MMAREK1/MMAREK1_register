@@ -7,8 +7,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		RegisterLoader registerLoader = new DatabaseRegisterLoader();
-		ConsoleUI ui = new ConsoleUI(registerLoader.load());
+		ConsoleUI ui = new ConsoleUI();
 		ui.run();
 	}
 }

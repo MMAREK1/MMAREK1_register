@@ -11,8 +11,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	/** register.Register of persons. */
-	Register register;
-	RegisterLoader registerLoader = new DatabaseRegisterLoader();
+	private Register register;
+	private RegisterLoader registerLoader = new FileRegisterLoader();
 	
 
 	/**
@@ -28,6 +28,16 @@ public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	private enum Option {
 		PRINT, ADD, UPDATE, REMOVE, FIND, EXIT
 	};
+
+	
+	public ConsoleUI() {
+		try {
+			register = registerLoader.load();
+		} catch (ClassNotFoundException | IOException e) {
+			register = new ListRegister();
+			e.printStackTrace();
+		}
+	}
 
 	public ConsoleUI(Register register) {
 		this.register = register;

@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseRegisterLoader implements RegisterLoader {
 	public static final String URL = "jdbc:mysql://localhost/school";
@@ -24,7 +22,6 @@ public class DatabaseRegisterLoader implements RegisterLoader {
 
 	}
 
-	@SuppressWarnings("resource")
 	@Override
 	public void store(Register register) throws FileNotFoundException, IOException {
 
@@ -47,7 +44,6 @@ public class DatabaseRegisterLoader implements RegisterLoader {
 			stmt2.close();
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
