@@ -21,6 +21,7 @@ public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	 */
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
+	
 	/**
 	 * Menu options.
 	 */
