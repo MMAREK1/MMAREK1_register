@@ -24,7 +24,9 @@ public class FileRegisterLoader implements RegisterLoader {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.RegisterLoader#store(register.Register)
 	 */
 	@Override
@@ -37,12 +39,14 @@ public class FileRegisterLoader implements RegisterLoader {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see register.RegisterLoader#load()
 	 */
 	@Override
 	public Register load() throws FileNotFoundException, IOException, ClassNotFoundException {
-		String fileName = "register.bin";
+		String fileName = "fileregister.bin";
 		File f = new File(fileName);
 		if (f.exists()) {
 			try (FileInputStream in = new FileInputStream(fileName);

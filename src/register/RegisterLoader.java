@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public interface RegisterLoader {
 
-	void store(Register register) throws FileNotFoundException,Exception;
+	void store(Register register) throws FileNotFoundException, Exception;
 
 	Register load() throws FileNotFoundException, IOException, ClassNotFoundException;
 

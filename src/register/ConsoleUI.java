@@ -11,9 +11,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	/** register.Register of persons. */
-	Register register;
-	RegisterLoader registerLoader = new DatabaseRegisterLoader();
-	
+	private Register register;
+	private RegisterLoader registerLoader;
 
 	/**
 	 * In JDK 6 use Console class instead.
@@ -28,6 +27,30 @@ public class ConsoleUI extends FileRegisterLoader implements Serializable {
 	private enum Option {
 		PRINT, ADD, UPDATE, REMOVE, FIND, EXIT
 	};
+
+	public ConsoleUI() {
+		System.out.println("choose:\n1. Database Register\n2. File Register\n3. Text File Register");
+		switch (readLine()) {
+		case "1":
+			registerLoader = new DatabaseRegisterLoader();
+			break;
+		case "2":
+			registerLoader = new FileRegisterLoader();
+			break;
+		case "3":
+			registerLoader = new TextFileRegisterLoader();
+			break;
+		default:
+			registerLoader = new FileRegisterLoader();
+			break;
+		}
+		try {
+			register = registerLoader.load();
+		} catch (ClassNotFoundException | IOException e) {
+			register = new ListRegister();
+			e.printStackTrace();
+		}
+	}
 
 	public ConsoleUI(Register register) {
 		this.register = register;

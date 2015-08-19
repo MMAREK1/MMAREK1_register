@@ -6,53 +6,55 @@ import java.util.List;
 
 @SuppressWarnings("serial")
 public class ListRegister implements Register {
-	private List<Person> listRegisters = new ArrayList<Person>();
+	private List<Person> persons = new ArrayList<Person>();
 
 	@Override
 	public int getCount() {
-		return listRegisters.size();
+		return persons.size();
 	}
 
 	@Override
 	public Person getPerson(int index) {
-		return listRegisters.get(index);
+		return persons.get(index);
 	}
 
 	@Override
 	public void addPerson(Person person) {
-		listRegisters.add(person);
-		Collections.sort(listRegisters);
+		persons.add(person);
+		Collections.sort(persons);
 	}
 
 	@Override
 	public Person findPersonByName(String name) {
-		for (int i = 0; i < listRegisters.size(); i++) {
-			if (name.equals(listRegisters.get(i).getName())) {
-				return getPerson(i);
-			}
-		}
-		return null;
+		// for (int i = 0; i < persons.size(); i++) {
+		// if (name.equals(persons.get(i).getName())) {
+		// return getPerson(i);
+		// }
+		// }
+		// return null;
+		return (Person) persons.stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
 	}
 
 	@Override
 	public Person findPersonByPhoneNumber(String phoneNumber) {
-		for (int i = 0; i < listRegisters.size(); i++) {
-			if (phoneNumber.equals(listRegisters.get(i).getPhoneNumber())) {
-				return getPerson(i);
-			}
-		}
-		return null;
+		// for (int i = 0; i < persons.size(); i++) {
+		// if (phoneNumber.equals(persons.get(i).getPhoneNumber())) {
+		// return getPerson(i);
+		// }
+		// }
+		// return null;
+		return (Person) persons.stream().filter(s -> s.getPhoneNumber().equals(phoneNumber)).findFirst().orElse(null);
 	}
 
 	@Override
 	public void removePerson(Person person) {
-		listRegisters.remove(person);
+		persons.remove(person);
 
 	}
 
 	@Override
 	public int getSize() {
-		return listRegisters.size();
+		return persons.size();
 	}
 
 }
