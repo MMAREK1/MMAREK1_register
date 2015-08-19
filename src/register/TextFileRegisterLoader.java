@@ -35,28 +35,24 @@ public class TextFileRegisterLoader implements RegisterLoader {
 				while ((lineRead = r.readLine()) != null) {
 					if (Pattern.matches("[a-zA-Z ]+", lineRead)) {
 						name = lineRead;
-						if((lineRead = r.readLine())!=null)
-						{	
-						if (Pattern.matches("[0-9]{10}", lineRead)) {
-							phoneNumber = lineRead;
-							register.addPerson(new Person(name, phoneNumber));
-						} else {
-							System.out.println("Person has wrong format - lost number");
-							name=lineRead;
-							if((lineRead = r.readLine())!=null)
-							{
+						if ((lineRead = r.readLine()) != null) {
 							if (Pattern.matches("[0-9]{10}", lineRead)) {
 								phoneNumber = lineRead;
 								register.addPerson(new Person(name, phoneNumber));
 							} else {
 								System.out.println("Person has wrong format - lost number");
+								name = lineRead;
+								if ((lineRead = r.readLine()) != null) {
+									if (Pattern.matches("[0-9]{10}", lineRead)) {
+										phoneNumber = lineRead;
+										register.addPerson(new Person(name, phoneNumber));
+									} else {
+										System.out.println("Person has wrong format - lost number");
+									}
+								} else
+									break;
 							}
-							}
-							else
-								break;
-						}
-						}
-						else
+						} else
 							break;
 					} else {
 						System.out.println("Person has wrong format - lost name");
