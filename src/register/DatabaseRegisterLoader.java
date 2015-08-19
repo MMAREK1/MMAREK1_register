@@ -55,12 +55,12 @@ public class DatabaseRegisterLoader implements RegisterLoader {
 		try {
 			Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 			Statement stmt = con.createStatement();
-	        ResultSet rs = stmt.executeQuery(SELECT);
-	        register = new ArrayRegister(20);
-	        while(rs.next()) {
-	        	register.addPerson(new Person(rs.getString(1), rs.getString(2)));
-	        }
-	        return register;
+			ResultSet rs = stmt.executeQuery(SELECT);
+			register = new ArrayRegister(20);
+			while (rs.next()) {
+				register.addPerson(new Person(rs.getString(1), rs.getString(2)));
+			}
+			return register;
 		} catch (SQLException e) {
 			Connection con;
 			try {
@@ -70,9 +70,9 @@ public class DatabaseRegisterLoader implements RegisterLoader {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			
+
 		}
-		
+
 		return new ArrayRegister(20);
 	}
 
